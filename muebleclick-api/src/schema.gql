@@ -1,0 +1,1065 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthResponse {
+  access_token: String!
+  refresh_token: String!
+  usuario: Usuario!
+}
+
+type Cliente {
+  direccion_principal: String
+  id_usuario: Int!
+  municipio_default: Municipio
+  puntos: Int!
+  telefono: String
+  usuario: Usuario!
+}
+
+type Comision {
+  fecha: DateTime!
+  id_comision: Int!
+  monto: Float!
+  pagada: Boolean!
+  porcentaje: Float!
+  vendedor: Empleado!
+  venta: Venta!
+}
+
+type CompraProveedor {
+  factura_num: String
+  fecha_compra: DateTime!
+  id_compra: Int!
+  notas: String
+  proveedor: Proveedor!
+  total: Float!
+}
+
+input CreateClienteInput {
+  direccion_principal: String
+  id_municipio_default: Int
+  id_usuario: Int!
+  telefono: String
+}
+
+input CreateComisionInput {
+  id_vendedor: Int!
+  id_venta: Int!
+  monto: Float!
+  porcentaje: Float!
+}
+
+input CreateCompraProveedorInput {
+  factura_num: String
+  id_proveedor: Int!
+  notas: String
+  total: Float!
+}
+
+input CreateCuponInput {
+  activo: Boolean
+  codigo: String!
+  descuento_porcentaje: Float!
+  fecha_expiracion: String!
+}
+
+input CreateDetalleOrdenCompraInput {
+  cantidad: Float!
+  id_materia: Int
+  id_orden: Int!
+  id_producto: Int
+  precio_unitario: Float!
+}
+
+input CreateDetalleOrdenProduccionInput {
+  cantidad_requerida: Float!
+  id_materia: Int!
+  id_produccion: Int!
+  unidad: String
+}
+
+input CreateDetallePedidoInput {
+  cantidad: Int!
+  id_pedido: Int!
+  id_producto: Int!
+}
+
+input CreateDetalleVentaInput {
+  cantidad: Int!
+  id_producto: Int!
+  id_venta: Int!
+}
+
+input CreateDireccionEnvioInput {
+  calle_numero: String!
+  id_municipio: Int
+  referencias: String
+}
+
+input CreateEmpleadoInput {
+  codigo_vendedor: String
+  comision_pct: Float
+  es_vendedor: Boolean
+  fecha_ingreso: String
+  id_sucursal: Int
+  id_usuario: Int!
+  puesto: String
+}
+
+input CreateEnvioInput {
+  costo_envio: Float
+  fecha_entrega_estimada: String
+  id_direccion: Int!
+  id_paqueteria: Int!
+  id_venta: Int!
+  nota: String
+  seguro: Boolean
+  tracking_number: String
+}
+
+input CreateEstadoInput {
+  codigo_iso: String!
+  nombre: String!
+}
+
+input CreateInventarioInput {
+  cantidad: Int
+  id_producto: Int!
+  id_sucursal: Int!
+  stock_max: Int
+  stock_min: Int
+}
+
+input CreateInventarioMPInput {
+  cantidad: Float
+  id_materia: Int!
+  id_sucursal: Int!
+  stock_max: Float
+  stock_min: Float
+}
+
+input CreateMateriaPrimaInput {
+  codigo: String
+  descripcion: String
+  id_proveedor_preferente: Int
+  nombre: String!
+  precio_unitario: Float!
+  unidad_medida: String
+}
+
+input CreateMetodoPagoInput {
+  detalles_pago: String
+  estado_pago: String
+  tipo_pago: String!
+}
+
+input CreateMovimientoInventarioInput {
+  cantidad: Int!
+  id_producto: Int!
+  id_sucursal: Int!
+  nota: String
+  referencia_id: Int
+  referencia_tipo: String
+  tipo: String!
+}
+
+input CreateMovimientoInventarioMPInput {
+  cantidad: Float!
+  id_materia: Int!
+  id_sucursal: Int!
+  nota: String
+  referencia_id: Int
+  referencia_tipo: String
+  tipo: String!
+}
+
+input CreateMuebleriaInput {
+  direccion_principal: String
+  id_propietario: Int!
+  nombre_negocio: String!
+  razon_social: String
+  rfc: String
+  telefono: String
+}
+
+input CreateMunicipioInput {
+  id_estado: Int!
+  nombre: String!
+}
+
+input CreateOrdenCompraInput {
+  fecha_recepcion_esperada: String
+  id_proveedor: Int!
+  id_sucursal: Int!
+}
+
+input CreateOrdenProduccionInput {
+  cantidad_planificada: Int!
+  fecha_programada: String
+  id_producto: Int!
+  id_sucursal: Int!
+  notas: String
+}
+
+input CreatePaqueteriaInput {
+  nombre: String!
+  telefono: String
+  tiempo_promedio_entrega_days: Float
+  url_tracking: String
+}
+
+input CreatePedidoInput {
+  id_direccion: Int
+  id_sucursal_origen: Int
+  tipo_entrega: String
+}
+
+input CreateProductoInput {
+  categoria: String
+  descripcion: String
+  id_muebleria: Int!
+  imagen_url: String
+  nombre: String!
+  peso_kg: Float
+  precio_venta: Float!
+  sku: String
+  tipo_producto: String
+  unidad_medida: String
+  volumen_m3: Float
+}
+
+input CreateProductoMateriaPrimaInput {
+  cantidad_por_unidad: Float!
+  id_materia: Int!
+  id_producto: Int!
+  unidad: String
+}
+
+input CreatePropietarioInput {
+  banco: String
+  clabe_interbancaria: String
+  curp_rfc: String
+  id_usuario: Int!
+}
+
+input CreateProveedorInput {
+  contacto_email: String
+  contacto_nombre: String
+  cuenta_bancaria: String
+  direccion: String
+  id_municipio: Int
+  nombre: String!
+  rfc: String
+  telefono: String
+  tiempo_entrega_dias: Float
+  tipo_proveedor: String
+}
+
+input CreateProveedorMateriaPrimaInput {
+  activo: Boolean
+  codigo_proveedor: String
+  id_materia: Int!
+  id_proveedor: Int!
+  lead_time_days: Float
+  min_cantidad_pedido: Float
+  precio_compra: Float!
+}
+
+input CreateProveedorProductoInput {
+  activo: Boolean
+  codigo_proveedor: String
+  id_producto: Int!
+  id_proveedor: Int!
+  lead_time_days: Float
+  min_cantidad_pedido: Float
+  precio_compra: Float!
+}
+
+input CreateReservaStockInput {
+  cantidad: Int!
+  id_pedido: Int!
+  id_producto: Int!
+}
+
+input CreateRolInput {
+  descripcion: String
+  nombre: String!
+}
+
+input CreateSucursalInput {
+  activo: Boolean
+  calle_numero: String
+  horario: String
+  id_muebleria: Int!
+  id_municipio: Int
+  nombre_sucursal: String!
+  telefono: String
+}
+
+input CreateTransferenciaInput {
+  id_sucursal_destino: Int!
+  id_sucursal_origen: Int!
+}
+
+input CreateUsuarioInput {
+  correo: String!
+  nombre: String!
+  password: String!
+  role_id: Int!
+}
+
+input CreateVentaInput {
+  codigo_cupon: String
+  id_metodo_pago: Int!
+  id_pedido: Int
+  id_vendedor: Int
+}
+
+type Cupon {
+  activo: Boolean!
+  codigo: String!
+  descuento_porcentaje: Float!
+  fecha_expiracion: String!
+  id_cupon: Int!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type DetalleOrdenCompra {
+  cantidad: Float!
+  id_detalle: Int!
+  materia_prima: MateriaPrima
+  orden: OrdenCompra!
+  precio_unitario: Float!
+  producto: Producto
+  subtotal: Float!
+}
+
+type DetalleOrdenProduccion {
+  cantidad_consumida: Float!
+  cantidad_requerida: Float!
+  id_detalle: Int!
+  materia_prima: MateriaPrima!
+  orden_produccion: OrdenProduccion!
+  unidad: String
+}
+
+type DetallePedido {
+  cantidad: Int!
+  id_detalle_pedido: Int!
+  pedido: Pedido!
+  precio_unitario: Float!
+  producto: Producto!
+  subtotal: Float!
+}
+
+type DetalleVenta {
+  cantidad: Int!
+  id_detalle_venta: Int!
+  precio_unitario: Float!
+  producto: Producto!
+  subtotal: Float!
+  venta: Venta!
+}
+
+type DireccionEnvio {
+  calle_numero: String!
+  cliente: Cliente!
+  id_direccion: Int!
+  municipio: Municipio
+  referencias: String
+}
+
+type Empleado {
+  activo: Boolean!
+  codigo_vendedor: String
+  comision_pct: Float
+  es_vendedor: Boolean!
+  fecha_ingreso: String
+  id_usuario: Int!
+  puesto: String
+  sucursal: Sucursal
+  usuario: Usuario!
+}
+
+type Envio {
+  costo_envio: Float!
+  direccion: DireccionEnvio!
+  estado_envio: String!
+  fecha_entrega_estimada: String
+  fecha_entrega_real: String
+  fecha_envio: DateTime
+  id_envio: Int!
+  nota: String
+  paqueteria: Paqueteria!
+  seguro: Boolean!
+  tracking_number: String
+  venta: Venta!
+}
+
+type Estado {
+  codigo_iso: String!
+  id_estado: Int!
+  municipios: [Municipio!]
+  nombre: String!
+}
+
+type Inventario {
+  cantidad: Int!
+  id_inventario: Int!
+  producto: Producto!
+  reservado: Int!
+  stock_max: Int!
+  stock_min: Int!
+  sucursal: Sucursal!
+  ultimo_movimiento: DateTime!
+}
+
+type InventarioMP {
+  cantidad: Float!
+  id_inventario_mp: Int!
+  materia_prima: MateriaPrima!
+  stock_max: Float!
+  stock_min: Float!
+  sucursal: Sucursal!
+  ultimo_movimiento: DateTime!
+}
+
+input LoginInput {
+  correo: String!
+  password: String!
+}
+
+type MateriaPrima {
+  actualizado_en: DateTime!
+  codigo: String
+  creado_en: DateTime!
+  descripcion: String
+  id_materia: Int!
+  nombre: String!
+  precio_unitario: Float!
+  proveedor_preferente: Proveedor
+  unidad_medida: String
+}
+
+type MetodoPago {
+  detalles_pago: String
+  estado_pago: String
+  id_metodo: Int!
+  tipo_pago: String!
+}
+
+type MovimientoInventario {
+  cantidad: Int!
+  fecha: DateTime!
+  id_movimiento: Int!
+  nota: String
+  producto: Producto!
+  referencia_id: Int
+  referencia_tipo: String
+  sucursal: Sucursal!
+  tipo: String!
+  usuario: Usuario!
+}
+
+type MovimientoInventarioMP {
+  cantidad: Float!
+  fecha: DateTime!
+  id_movimiento: Int!
+  materia_prima: MateriaPrima!
+  nota: String
+  referencia_id: Int
+  referencia_tipo: String
+  sucursal: Sucursal!
+  tipo: String!
+  usuario: Usuario!
+}
+
+type Muebleria {
+  creado_en: DateTime!
+  direccion_principal: String
+  id_muebleria: Int!
+  nombre_negocio: String!
+  propietario: Propietario!
+  razon_social: String
+  rfc: String
+  sucursales: [Sucursal!]
+  telefono: String
+}
+
+type Municipio {
+  estado: Estado!
+  id_municipio: Int!
+  nombre: String!
+}
+
+type Mutation {
+  cancelarPedido(id_pedido: Int!): Pedido!
+  createBom(input: CreateProductoMateriaPrimaInput!): ProductoMateriaPrima!
+  createCliente(input: CreateClienteInput!): Cliente!
+  createComision(input: CreateComisionInput!): Comision!
+  createCompraProveedor(input: CreateCompraProveedorInput!): CompraProveedor!
+  createCupon(input: CreateCuponInput!): Cupon!
+  createDetalleOrdenCompra(input: CreateDetalleOrdenCompraInput!): DetalleOrdenCompra!
+  createDetalleOrdenProduccion(input: CreateDetalleOrdenProduccionInput!): DetalleOrdenProduccion!
+  createDetallePedido(input: CreateDetallePedidoInput!): DetallePedido!
+  createDetalleVenta(input: CreateDetalleVentaInput!): DetalleVenta!
+  createDireccionEnvio(input: CreateDireccionEnvioInput!): DireccionEnvio!
+  createEmpleado(input: CreateEmpleadoInput!): Empleado!
+  createEnvio(input: CreateEnvioInput!): Envio!
+  createEstado(input: CreateEstadoInput!): Estado!
+  createInventario(input: CreateInventarioInput!): Inventario!
+  createInventarioMP(input: CreateInventarioMPInput!): InventarioMP!
+  createMateriaPrima(input: CreateMateriaPrimaInput!): MateriaPrima!
+  createMetodoPago(input: CreateMetodoPagoInput!): MetodoPago!
+  createMovimientoInventario(input: CreateMovimientoInventarioInput!): MovimientoInventario!
+  createMovimientoInventarioMP(input: CreateMovimientoInventarioMPInput!): MovimientoInventarioMP!
+  createMuebleria(input: CreateMuebleriaInput!): Muebleria!
+  createMunicipio(input: CreateMunicipioInput!): Municipio!
+  createOrdenCompra(input: CreateOrdenCompraInput!): OrdenCompra!
+  createOrdenProduccion(input: CreateOrdenProduccionInput!): OrdenProduccion!
+  createPaqueteria(input: CreatePaqueteriaInput!): Paqueteria!
+  createPedido(input: CreatePedidoInput!): Pedido!
+  createProducto(input: CreateProductoInput!): Producto!
+  createPropietario(input: CreatePropietarioInput!): Propietario!
+  createProveedor(input: CreateProveedorInput!): Proveedor!
+  createProveedorMateriaPrima(input: CreateProveedorMateriaPrimaInput!): ProveedorMateriaPrima!
+  createProveedorProducto(input: CreateProveedorProductoInput!): ProveedorProducto!
+  createReservaStock(input: CreateReservaStockInput!): ReservaStock!
+  createRol(input: CreateRolInput!): Rol!
+  createSucursal(input: CreateSucursalInput!): Sucursal!
+  createTransferencia(input: CreateTransferenciaInput!): Transferencia!
+  createUsuario(input: CreateUsuarioInput!): Usuario!
+  createVenta(input: CreateVentaInput!): Venta!
+  deactivateUsuario(id_usuario: Int!): Usuario!
+  liberarReservaStock(id_reserva: Int!): Boolean!
+  limpiarReservasExpiradas: Int!
+  login(input: LoginInput!): AuthResponse!
+  marcarComisionPagada(id_comision: Int!): Comision!
+  register(input: CreateUsuarioInput!): AuthResponse!
+  registrarConsumoMP(cantidad_consumida: Float!, id_detalle: Int!): DetalleOrdenProduccion!
+  removeBom(id: Int!): Boolean!
+  removeDetalleOrdenCompra(id_detalle: Int!): Boolean!
+  removeDetalleOrdenProduccion(id_detalle: Int!): Boolean!
+  removeDetallePedido(id_detalle_pedido: Int!): Boolean!
+  removeDireccionEnvio(id_direccion: Int!): Boolean!
+  removeEstado(id_estado: Int!): Boolean!
+  removeMateriaPrima(id_materia: Int!): Boolean!
+  removeMuebleria(id_muebleria: Int!): Boolean!
+  removeMunicipio(id_municipio: Int!): Boolean!
+  removeProducto(id_producto: Int!): Boolean!
+  removeProveedor(id_proveedor: Int!): Boolean!
+  removeProveedorMateriaPrima(id: Int!): Boolean!
+  removeProveedorProducto(id: Int!): Boolean!
+  removeRol(id_rol: Int!): Boolean!
+  sumarPuntos(id_usuario: Int!, puntos: Int!): Cliente!
+  toggleActivoCupon(id_cupon: Int!): Cupon!
+  toggleActivoEmpleado(id_usuario: Int!): Empleado!
+  toggleActivoProveedorMateriaPrima(id: Int!): ProveedorMateriaPrima!
+  toggleActivoProveedorProducto(id: Int!): ProveedorProducto!
+  toggleActivoSucursal(id_sucursal: Int!): Sucursal!
+  updateCliente(input: UpdateClienteInput!): Cliente!
+  updateCompraProveedor(input: UpdateCompraProveedorInput!): CompraProveedor!
+  updateCupon(input: UpdateCuponInput!): Cupon!
+  updateDireccionEnvio(input: UpdateDireccionEnvioInput!): DireccionEnvio!
+  updateEmpleado(input: UpdateEmpleadoInput!): Empleado!
+  updateEstado(input: UpdateEstadoInput!): Estado!
+  updateEstadoEnvio(input: UpdateEnvioInput!): Envio!
+  updateEstadoOrdenCompra(input: UpdateOrdenCompraInput!): OrdenCompra!
+  updateEstadoOrdenProduccion(input: UpdateOrdenProduccionInput!): OrdenProduccion!
+  updateEstadoPedido(input: UpdatePedidoInput!): Pedido!
+  updateEstadoTransferencia(input: UpdateTransferenciaInput!): Transferencia!
+  updateEstadoVenta(input: UpdateVentaInput!): Venta!
+  updateInventario(input: UpdateInventarioInput!): Inventario!
+  updateInventarioMP(input: UpdateInventarioMPInput!): InventarioMP!
+  updateMateriaPrima(input: UpdateMateriaPrimaInput!): MateriaPrima!
+  updateMetodoPago(input: UpdateMetodoPagoInput!): MetodoPago!
+  updateMuebleria(input: UpdateMuebleriaInput!): Muebleria!
+  updateMunicipio(input: UpdateMunicipioInput!): Municipio!
+  updatePaqueteria(input: UpdatePaqueteriaInput!): Paqueteria!
+  updateProducto(input: UpdateProductoInput!): Producto!
+  updatePropietario(input: UpdatePropietarioInput!): Propietario!
+  updateProveedor(input: UpdateProveedorInput!): Proveedor!
+  updateRol(input: UpdateRolInput!): Rol!
+  updateSucursal(input: UpdateSucursalInput!): Sucursal!
+  updateUsuario(input: UpdateUsuarioInput!): Usuario!
+  verificarPropietario(id_usuario: Int!): Propietario!
+}
+
+type OrdenCompra {
+  creado_por: Usuario!
+  estado: String!
+  fecha_orden: DateTime!
+  fecha_recepcion_esperada: String
+  id_orden: Int!
+  proveedor: Proveedor!
+  sucursal: Sucursal!
+  total: Float!
+}
+
+type OrdenProduccion {
+  cantidad_planificada: Int!
+  creado_por: Usuario!
+  estado: String!
+  fecha_fin: DateTime
+  fecha_inicio: DateTime
+  fecha_programada: String
+  id_produccion: Int!
+  notas: String
+  producto: Producto!
+  sucursal: Sucursal!
+}
+
+type Paqueteria {
+  id_paqueteria: Int!
+  nombre: String!
+  telefono: String
+  tiempo_promedio_entrega_days: Float
+  url_tracking: String
+}
+
+type Pedido {
+  cliente: Cliente!
+  direccion: DireccionEnvio
+  estado_pedido: String!
+  fecha_pedido: DateTime!
+  id_pedido: Int!
+  sucursal_origen: Sucursal
+  tipo_entrega: String!
+  total: Float!
+}
+
+type Producto {
+  actualizado_en: DateTime!
+  categoria: String
+  creado_en: DateTime!
+  descripcion: String
+  id_producto: Int!
+  imagen_url: String
+  muebleria: Muebleria!
+  nombre: String!
+  peso_kg: Float
+  precio_venta: Float!
+  sku: String
+  tipo_producto: String
+  unidad_medida: String
+  volumen_m3: Float
+}
+
+type ProductoMateriaPrima {
+  cantidad_por_unidad: Float!
+  id: Int!
+  materia_prima: MateriaPrima!
+  producto: Producto!
+  unidad: String
+}
+
+type Propietario {
+  banco: String
+  clabe_interbancaria: String
+  curp_rfc: String
+  id_usuario: Int!
+  usuario: Usuario!
+  verificado: Boolean!
+}
+
+type Proveedor {
+  contacto_email: String
+  contacto_nombre: String
+  cuenta_bancaria: String
+  direccion: String
+  id_proveedor: Int!
+  municipio: Municipio
+  nombre: String!
+  rfc: String
+  telefono: String
+  tiempo_entrega_dias: Float
+  tipo_proveedor: String
+}
+
+type ProveedorMateriaPrima {
+  activo: Boolean!
+  codigo_proveedor: String
+  id: Int!
+  lead_time_days: Float
+  materia_prima: MateriaPrima!
+  min_cantidad_pedido: Float
+  precio_compra: Float!
+  proveedor: Proveedor!
+}
+
+type ProveedorProducto {
+  activo: Boolean!
+  codigo_proveedor: String
+  id: Int!
+  lead_time_days: Float
+  min_cantidad_pedido: Float
+  precio_compra: Float!
+  producto: Producto!
+  proveedor: Proveedor!
+}
+
+type Query {
+  bomPorProducto(id_producto: Int!): [ProductoMateriaPrima!]!
+  bomProductos: [ProductoMateriaPrima!]!
+  buscarMateriasPrimas(termino: String!): [MateriaPrima!]!
+  buscarProductos(termino: String!): [Producto!]!
+  cliente(id_usuario: Int!): Cliente!
+  clientes: [Cliente!]!
+  comisiones: [Comision!]!
+  comisionesPorVendedor(id_vendedor: Int!): [Comision!]!
+  comprasPorProveedor(id_proveedor: Int!): [CompraProveedor!]!
+  comprasProveedores: [CompraProveedor!]!
+  cupon(id_cupon: Int!): Cupon!
+  cupones: [Cupon!]!
+  detalleOrdenCompra(id_orden: Int!): [DetalleOrdenCompra!]!
+  detalleOrdenProduccion(id_produccion: Int!): [DetalleOrdenProduccion!]!
+  detallePedido(id_pedido: Int!): [DetallePedido!]!
+  detalleVenta(id_venta: Int!): [DetalleVenta!]!
+  empleados: [Empleado!]!
+  empleadosPorSucursal(id_sucursal: Int!): [Empleado!]!
+  envioDeVenta(id_venta: Int!): Envio
+  envios: [Envio!]!
+  estado(id_estado: Int!): Estado!
+  estados: [Estado!]!
+  inventarioMP: [InventarioMP!]!
+  inventarioMPPorSucursal(id_sucursal: Int!): [InventarioMP!]!
+  inventarioPorSucursal(id_sucursal: Int!): [Inventario!]!
+  inventarios: [Inventario!]!
+  materiaPrima(id_materia: Int!): MateriaPrima!
+  materiasPrimas: [MateriaPrima!]!
+  me: Usuario!
+  metodosPago: [MetodoPago!]!
+  miPerfilCliente: Cliente!
+  miPerfilEmpleado: Empleado!
+  miPerfilPropietario: Propietario!
+  misComisiones: [Comision!]!
+  misComisionesPendientes: [Comision!]!
+  misDirecciones: [DireccionEnvio!]!
+  misMueblerias: [Muebleria!]!
+  misPedidos: [Pedido!]!
+  misVentas: [Venta!]!
+  movimientosInventario: [MovimientoInventario!]!
+  movimientosInventarioMP: [MovimientoInventarioMP!]!
+  movimientosMPPorMateria(id_materia: Int!): [MovimientoInventarioMP!]!
+  movimientosMPPorSucursal(id_sucursal: Int!): [MovimientoInventarioMP!]!
+  movimientosPorProducto(id_producto: Int!): [MovimientoInventario!]!
+  movimientosPorSucursal(id_sucursal: Int!): [MovimientoInventario!]!
+  muebleria(id_muebleria: Int!): Muebleria!
+  mueblerias: [Muebleria!]!
+  municipio(id_municipio: Int!): Municipio!
+  municipios: [Municipio!]!
+  municipiosPorEstado(id_estado: Int!): [Municipio!]!
+  ordenCompra(id_orden: Int!): OrdenCompra!
+  ordenProduccion(id_produccion: Int!): OrdenProduccion!
+  ordenesCompra: [OrdenCompra!]!
+  ordenesCompraPorSucursal(id_sucursal: Int!): [OrdenCompra!]!
+  ordenesProduccion: [OrdenProduccion!]!
+  ordenesProduccionPorEstado(estado: String!): [OrdenProduccion!]!
+  ordenesProduccionPorSucursal(id_sucursal: Int!): [OrdenProduccion!]!
+  paqueterias: [Paqueteria!]!
+  pedido(id_pedido: Int!): Pedido!
+  pedidos: [Pedido!]!
+  pedidosPorEstado(estado: String!): [Pedido!]!
+  pedidosPorSucursal(id_sucursal: Int!): [Pedido!]!
+  producto(id_producto: Int!): Producto!
+  productos: [Producto!]!
+  productosPorCategoria(categoria: String!): [Producto!]!
+  productosPorMuebleria(id_muebleria: Int!): [Producto!]!
+  productosPorProveedor(id_proveedor: Int!): [ProveedorProducto!]!
+  propietario(id_usuario: Int!): Propietario!
+  propietarios: [Propietario!]!
+  proveedor(id_proveedor: Int!): Proveedor!
+  proveedorMateriasPrimas: [ProveedorMateriaPrima!]!
+  proveedorProductos: [ProveedorProducto!]!
+  proveedores: [Proveedor!]!
+  proveedoresPorMateria(id_materia: Int!): [ProveedorMateriaPrima!]!
+  proveedoresPorProducto(id_producto: Int!): [ProveedorProducto!]!
+  proveedoresPorTipo(tipo_proveedor: String!): [Proveedor!]!
+  reservasPorPedido(id_pedido: Int!): [ReservaStock!]!
+  reservasStock: [ReservaStock!]!
+  rol(id_rol: Int!): Rol!
+  roles: [Rol!]!
+  stockCritico(id_sucursal: Int!): [Inventario!]!
+  stockCriticoMP(id_sucursal: Int!): [InventarioMP!]!
+  sucursal(id_sucursal: Int!): Sucursal!
+  sucursales: [Sucursal!]!
+  sucursalesPorMuebleria(id_muebleria: Int!): [Sucursal!]!
+  transferencia(id_transferencia: Int!): Transferencia!
+  transferencias: [Transferencia!]!
+  transferenciasPorDestino(id_sucursal: Int!): [Transferencia!]!
+  transferenciasPorOrigen(id_sucursal: Int!): [Transferencia!]!
+  usuario(id_usuario: Int!): Usuario!
+  usuarios: [Usuario!]!
+  validarCupon(codigo: String!): Cupon!
+  vendedoresPorSucursal(id_sucursal: Int!): [Empleado!]!
+  ventas: [Venta!]!
+  ventasPorVendedor(id_vendedor: Int!): [Venta!]!
+}
+
+type ReservaStock {
+  cantidad: Int!
+  fecha_expira: DateTime!
+  fecha_reserva: DateTime!
+  id_pedido: Int!
+  id_reserva: Int!
+  producto: Producto!
+}
+
+type Rol {
+  descripcion: String
+  id_rol: Int!
+  nombre: String!
+}
+
+type Sucursal {
+  activo: Boolean!
+  calle_numero: String
+  creado_en: DateTime!
+  horario: String
+  id_sucursal: Int!
+  muebleria: Muebleria!
+  municipio: Municipio
+  nombre_sucursal: String!
+  telefono: String
+}
+
+type Transferencia {
+  creado_por: Usuario!
+  estado: String!
+  fecha_transferencia: DateTime!
+  id_transferencia: Int!
+  sucursal_destino: Sucursal!
+  sucursal_origen: Sucursal!
+}
+
+input UpdateClienteInput {
+  direccion_principal: String
+  id_municipio_default: Int
+  id_usuario: Int!
+  puntos: Int
+  telefono: String
+}
+
+input UpdateCompraProveedorInput {
+  factura_num: String
+  id_compra: Int!
+  id_proveedor: Int
+  notas: String
+  total: Float
+}
+
+input UpdateCuponInput {
+  activo: Boolean
+  codigo: String
+  descuento_porcentaje: Float
+  fecha_expiracion: String
+  id_cupon: Int!
+}
+
+input UpdateDireccionEnvioInput {
+  calle_numero: String
+  id_direccion: Int!
+  id_municipio: Int
+  referencias: String
+}
+
+input UpdateEmpleadoInput {
+  activo: Boolean
+  codigo_vendedor: String
+  comision_pct: Float
+  es_vendedor: Boolean
+  fecha_ingreso: String
+  id_sucursal: Int
+  id_usuario: Int!
+  puesto: String
+}
+
+input UpdateEnvioInput {
+  estado_envio: String!
+  fecha_entrega_real: String
+  id_envio: Int!
+  tracking_number: String
+}
+
+input UpdateEstadoInput {
+  codigo_iso: String
+  id_estado: Int!
+  nombre: String
+}
+
+input UpdateInventarioInput {
+  cantidad: Int
+  id_inventario: Int!
+  id_producto: Int
+  id_sucursal: Int
+  stock_max: Int
+  stock_min: Int
+}
+
+input UpdateInventarioMPInput {
+  cantidad: Float
+  id_inventario_mp: Int!
+  id_materia: Int
+  id_sucursal: Int
+  stock_max: Float
+  stock_min: Float
+}
+
+input UpdateMateriaPrimaInput {
+  codigo: String
+  descripcion: String
+  id_materia: Int!
+  id_proveedor_preferente: Int
+  nombre: String
+  precio_unitario: Float
+  unidad_medida: String
+}
+
+input UpdateMetodoPagoInput {
+  detalles_pago: String
+  estado_pago: String
+  id_metodo: Int!
+  tipo_pago: String
+}
+
+input UpdateMuebleriaInput {
+  direccion_principal: String
+  id_muebleria: Int!
+  id_propietario: Int
+  nombre_negocio: String
+  razon_social: String
+  rfc: String
+  telefono: String
+}
+
+input UpdateMunicipioInput {
+  id_estado: Int
+  id_municipio: Int!
+  nombre: String
+}
+
+input UpdateOrdenCompraInput {
+  estado: String!
+  id_orden: Int!
+}
+
+input UpdateOrdenProduccionInput {
+  estado: String!
+  id_produccion: Int!
+  notas: String
+}
+
+input UpdatePaqueteriaInput {
+  id_paqueteria: Int!
+  nombre: String
+  telefono: String
+  tiempo_promedio_entrega_days: Float
+  url_tracking: String
+}
+
+input UpdatePedidoInput {
+  estado_pedido: String!
+  id_pedido: Int!
+}
+
+input UpdateProductoInput {
+  categoria: String
+  descripcion: String
+  id_muebleria: Int
+  id_producto: Int!
+  imagen_url: String
+  nombre: String
+  peso_kg: Float
+  precio_venta: Float
+  sku: String
+  tipo_producto: String
+  unidad_medida: String
+  volumen_m3: Float
+}
+
+input UpdatePropietarioInput {
+  banco: String
+  clabe_interbancaria: String
+  curp_rfc: String
+  id_usuario: Int!
+  verificado: Boolean
+}
+
+input UpdateProveedorInput {
+  contacto_email: String
+  contacto_nombre: String
+  cuenta_bancaria: String
+  direccion: String
+  id_municipio: Int
+  id_proveedor: Int!
+  nombre: String
+  rfc: String
+  telefono: String
+  tiempo_entrega_dias: Float
+  tipo_proveedor: String
+}
+
+input UpdateRolInput {
+  descripcion: String
+  id_rol: Int!
+  nombre: String
+}
+
+input UpdateSucursalInput {
+  activo: Boolean
+  calle_numero: String
+  horario: String
+  id_muebleria: Int
+  id_municipio: Int
+  id_sucursal: Int!
+  nombre_sucursal: String
+  telefono: String
+}
+
+input UpdateTransferenciaInput {
+  estado: String!
+  id_transferencia: Int!
+}
+
+input UpdateUsuarioInput {
+  activo: Boolean
+  correo: String
+  id_usuario: Int!
+  nombre: String
+  password: String
+  role_id: Int
+}
+
+input UpdateVentaInput {
+  estado_venta: String!
+  id_venta: Int!
+}
+
+type Usuario {
+  activo: Boolean!
+  correo: String!
+  fecha_registro: DateTime!
+  id_usuario: Int!
+  nombre: String!
+  rol: Rol!
+}
+
+type Venta {
+  cliente: Cliente!
+  comision: Float
+  cupon: Cupon
+  descuento: Float!
+  estado_venta: String!
+  fecha_venta: DateTime!
+  id_venta: Int!
+  metodo_pago: MetodoPago!
+  pedido: Pedido
+  sub_total: Float!
+  total_venta: Float!
+  vendedor: Empleado
+}
