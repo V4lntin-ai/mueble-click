@@ -2,9 +2,22 @@ import {
   createContext,
   useContext,
   useState,
-  useEffect,
-  ReactNode,
+  type ReactNode,
 } from 'react';
+import { apolloClient } from '@/lib/apollo';
+import { gql } from '@apollo/client';
+
+const LOGOUT_MUTATION = gql`
+  mutation Logout {
+    logout
+  }
+`;
+
+const LOGOUT_ALL_MUTATION = gql`
+  mutation LogoutAll {
+    logoutAll
+  }
+`;
 
 interface Usuario {
   id_usuario: number;
@@ -17,7 +30,8 @@ interface AuthContextType {
   usuario: Usuario | null;
   token: string | null;
   login: (token: string, refreshToken: string, usuario: Usuario) => void;
-  logout: () => void;
+  logout: () => Promise<void>;
+  logoutAll: () => Promise<void>;
   isAuthenticated: boolean;
   isPropietario: boolean;
   isAdmin: boolean;
@@ -47,10 +61,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUsuario(user);
   };
 
-  const logout = () => {
+  const clearLocal = () => {
     localStorage.clear();
     setToken(null);
     setUsuario(null);
+    apolloClient.clearStore();
+  };
+
+  const logout = async () => {
+    try {
+      await apolloClient.mutate({ mutation: LOGOUT_MUTATION });
+    } catch {
+      // Si falla igual limpiamos local
+    } finally {
+      clearLocal();
+    }
+  };
+
+  const logoutAll = async () => {
+    try {
+      await apolloClient.mutate({ mutation: LOGOUT_ALL_MUTATION });
+    } catch {
+      // Si falla igual limpiamos local
+    } finally {
+      clearLocal();
+    }
   };
 
   return (
@@ -60,6 +95,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         token,
         login,
         logout,
+        logoutAll,
         isAuthenticated: !!token,
         isPropietario: usuario?.rol?.nombre === 'Propietario',
         isAdmin: usuario?.rol?.nombre === 'Admin',

@@ -24,7 +24,7 @@ export class Usuario {
   @Column({ unique: true, length: 100 })
   correo!: string;
 
-  // No exponer password en GraphQL — sin @Field()
+  // Sin @Field — nunca se expone en GraphQL
   @Column({ length: 255 })
   password!: string;
 
@@ -35,9 +35,22 @@ export class Usuario {
 
   @Field()
   @CreateDateColumn()
-  fecha_registro!: Date;
+  fecha_registro?: Date;
 
   @Field()
   @Column({ default: true })
-  activo!: boolean;
+  activo?: boolean;
+
+  // Sin @Field — datos internos de sesión
+  @Column({ type: 'text', nullable: true })
+  refresh_token!: string | null;
+
+  @Column({ type: 'timestamp', nullable: true })
+  last_logout? : Date | null;
+
+  @Column({ type: 'text', nullable: true })
+  reset_token!: string | null;
+
+  @Column({ type: 'timestamp', nullable: true })
+  reset_token_expires?: Date | null;
 }

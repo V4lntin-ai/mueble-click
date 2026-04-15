@@ -408,6 +408,10 @@ type Estado {
   nombre: String!
 }
 
+input ForgotPasswordInput {
+  correo: String!
+}
+
 type Inventario {
   cantidad: Int!
   id_inventario: Int!
@@ -536,10 +540,14 @@ type Mutation {
   createUsuario(input: CreateUsuarioInput!): Usuario!
   createVenta(input: CreateVentaInput!): Venta!
   deactivateUsuario(id_usuario: Int!): Usuario!
+  forgotPassword(input: ForgotPasswordInput!): Boolean!
   liberarReservaStock(id_reserva: Int!): Boolean!
   limpiarReservasExpiradas: Int!
   login(input: LoginInput!): AuthResponse!
+  logout: Boolean!
+  logoutAll: Boolean!
   marcarComisionPagada(id_comision: Int!): Comision!
+  refreshToken(input: RefreshTokenInput!): AuthResponse!
   register(input: CreateUsuarioInput!): AuthResponse!
   registrarConsumoMP(cantidad_consumida: Float!, id_detalle: Int!): DetalleOrdenProduccion!
   removeBom(id: Int!): Boolean!
@@ -556,6 +564,7 @@ type Mutation {
   removeProveedorMateriaPrima(id: Int!): Boolean!
   removeProveedorProducto(id: Int!): Boolean!
   removeRol(id_rol: Int!): Boolean!
+  resetPassword(input: ResetPasswordInput!): Boolean!
   sumarPuntos(id_usuario: Int!, puntos: Int!): Cliente!
   toggleActivoCupon(id_cupon: Int!): Cupon!
   toggleActivoEmpleado(id_usuario: Int!): Empleado!
@@ -801,6 +810,10 @@ type Query {
   ventasPorVendedor(id_vendedor: Int!): [Venta!]!
 }
 
+input RefreshTokenInput {
+  refresh_token: String!
+}
+
 type ReservaStock {
   cantidad: Int!
   fecha_expira: DateTime!
@@ -808,6 +821,11 @@ type ReservaStock {
   id_pedido: Int!
   id_reserva: Int!
   producto: Producto!
+}
+
+input ResetPasswordInput {
+  nueva_password: String!
+  token: String!
 }
 
 type Rol {

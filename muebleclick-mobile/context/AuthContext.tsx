@@ -1,14 +1,14 @@
 // context/AuthContext.tsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import * as Storage from '../lib/storage'; 
 
-// Alineado con el enum de roles de tu backend NestJS
 export type Role = 'Cliente' | 'Empleado' | 'Propietario' | null;
 
 interface AuthState {
   role: Role;
   isLoading: boolean;
-  login: (selectedRole: Role) => void;
-  logout: () => void;
+  login: (token: string, selectedRole: Role) => Promise<void>;
+  logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthState | undefined>(undefined);
@@ -17,18 +17,33 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [role, setRole] = useState<Role>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Simulamos la carga inicial (ej. leyendo un token de AsyncStorage)
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 500);
+    async function loadStoredSession() {
+      try {
+        const storedToken = await Storage.getItemAsync('access_token');
+        const storedRole = await Storage.getItemAsync('user_role');
+        
+        if (storedToken && storedRole) {
+          setRole(storedRole as Role);
+        }
+      } catch (error) {
+        console.error("Error cargando la sesión:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    loadStoredSession();
   }, []);
 
-  const login = (selectedRole: Role) => {
+  const login = async (token: string, selectedRole: Role) => {
+    await Storage.setItemAsync('access_token', token);
+    await Storage.setItemAsync('user_role', selectedRole || '');
     setRole(selectedRole);
   };
 
-  const logout = () => {
+  const logout = async () => {
+    await Storage.deleteItemAsync('access_token');
+    await Storage.deleteItemAsync('user_role');
     setRole(null);
   };
 

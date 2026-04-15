@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react';
-import { useForm, useWatch } from 'react-hook-form';
+import { useForm, useWatch, type Resolver } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useMutation, useQuery } from '@apollo/client/react';
@@ -24,6 +24,10 @@ interface SucursalOption {
   id_sucursal: number;
   nombre_sucursal: string;
   muebleria?: { nombre_negocio: string };
+}
+
+interface GetSucursalesQuery {
+  sucursales: SucursalOption[];
 }
 
 interface EmpleadoData {
@@ -61,13 +65,15 @@ interface Props {
 export function EmpleadoFormDialog({ open, onClose, onSuccess, empleado, id_usuario_nuevo }: Props) {
   const isEdit = !!empleado;
 
-  const { data: sucursalData } = useQuery(GET_SUCURSALES);
+  const { data: sucursalData } = useQuery<GetSucursalesQuery>(GET_SUCURSALES);
   const sucursales = useMemo(() => sucursalData?.sucursales ?? [], [sucursalData?.sucursales]);
 
   const {
     register, handleSubmit, reset, setValue, control,
     formState: { errors },
-  } = useForm<FormData>({ resolver: zodResolver(schema) });
+  } = useForm<FormData>({
+    resolver: zodResolver(schema) as Resolver<FormData>,
+  });
 
   const sucursalVal  = useWatch({ control, name: 'id_sucursal' });
   const esVendedor   = useWatch({ control, name: 'es_vendedor' });

@@ -20,17 +20,25 @@ function RootLayoutNav() {
   useEffect(() => {
     if (isLoading) return;
 
-    // ¿En qué grupo estamos intentando entrar?
+    // ¿En qué grupo estamos actualmente?
     const inAuthGroup = segments[0] === '(auth)';
+    const currentGroup = segments[0];
 
     if (!role && !inAuthGroup) {
-      // Si no hay rol y no está en auth, mándalo al login
+      // Si no hay rol y no está en login, mándalo al login
       router.replace('/(auth)/login');
     } else if (role) {
-      // Si ya tiene rol, envíalo a su stack específico
-      if (role === 'Cliente') router.replace('/(cliente)');
-      else if (role === 'Empleado') router.replace('/(empleado)');
-      else if (role === 'Propietario') router.replace('/(propietario)');
+      // MAGIA AQUÍ: Solo redirige si el usuario está FUERA de su grupo permitido.
+      // Así respetamos la navegación interna (las pestañas).
+      if (role === 'Cliente' && currentGroup !== '(cliente)') {
+        router.replace('/(cliente)');
+      } 
+      else if (role === 'Empleado' && currentGroup !== '(empleado)') {
+        router.replace('/(empleado)');
+      } 
+      else if (role === 'Propietario' && currentGroup !== '(propietario)') {
+        router.replace('/(propietario)');
+      }
     }
   }, [role, isLoading, segments]);
 

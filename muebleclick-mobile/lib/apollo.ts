@@ -1,18 +1,15 @@
 // lib/apollo.ts
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import * as Storage from './storage'; 
 
-// Apuntamos al backend NestJS. 
-// Nota: En emuladores de Android físico a veces se usa 10.0.2.2 en lugar de localhost.
-// Como estás desarrollando en Web, localhost funcionará perfecto.
 const httpLink = createHttpLink({
   uri: 'http://localhost:3000/graphql', 
 });
 
-// Este middleware interceptará todas las peticiones para inyectar el JWT en el futuro
 const authLink = setContext(async (_, { headers }) => {
-  // Aquí leeremos el token desde AsyncStorage/SecureStore más adelante
-  const token = null; // simulate fetching token
+  // Ahora usará localStorage en la web y SecureStore en móvil
+  const token = await Storage.getItemAsync('access_token');
   
   return {
     headers: {
