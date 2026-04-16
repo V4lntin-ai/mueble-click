@@ -13,3 +13,25 @@ export const GET_PRODUCTOS = gql`
     }
   }
 `;
+
+export const CREATE_PRODUCTO = gql`
+  mutation CreateProducto($input: CreateProductoInput!) {
+    createProducto(input: $input) {
+      id_producto
+      nombre
+      sku
+      precio_venta
+    }
+  }
+`;
+
+export const GET_PRODUCTOS_POR_MUEBLERIA = gql`
+  query GetProductosPorMuebleria($id_muebleria: Int!) {
+    productosPorMuebleria(id_muebleria: $id_muebleria) {
+      id_producto
+      nombre
+      sku
+      precio_venta
+    }
+  }
+`;

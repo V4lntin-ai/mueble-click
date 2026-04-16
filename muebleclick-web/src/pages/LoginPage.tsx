@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -182,6 +182,14 @@ export default function LoginPage() {
                   'Iniciar sesión'
                 )}
               </Button>
+              <div className="text-center">
+                <Link
+                  to="/forgot-password"
+                  className="text-xs text-[var(--color-muted-foreground)] hover:text-[var(--color-primary)] transition-colors"
+                >
+                  ¿Olvidaste tu contraseña?
+                </Link>
+              </div>
             </form>
           </CardContent>
         </Card>

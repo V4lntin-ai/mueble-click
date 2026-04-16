@@ -25,16 +25,24 @@ export function ProductCard({
   className 
 }: ProductCardProps) {
   
-  // Lógica simple de presentación de inventario
+  // Lógica mejorada para mostrar stock exacto al vendedor
   const getStockBadge = () => {
-    if (stock <= 0) return <Badge label="Agotado" variant="danger" />;
-    if (stock <= 3) return <Badge label={`Solo ${stock} ud.`} variant="warning" />;
-    return <Badge label="Disponible" variant="success" />;
+    if (stock <= 0) {
+      return <Badge label="Agotado" variant="danger" />;
+    }
+    
+    // Si hay poco stock (ej. menos de 5), usamos un color de advertencia
+    if (stock <= 5) {
+      return <Badge label={`${stock} en stock`} variant="warning" />;
+    }
+
+    // Para stock saludable, mostramos el número en verde
+    return <Badge label={`${stock} en stock`} variant="success" />;
   };
 
   return (
     <Card className={cn("flex-row items-center p-3 mb-4", className)}>
-      {/* Imagen del producto con fallback a un fondo beige oscuro */}
+      {/* Imagen del producto */}
       <View className="w-20 h-20 bg-beige-dark rounded-xl overflow-hidden mr-4 shadow-neo-inset">
         {imageUrl ? (
           <Image source={{ uri: imageUrl }} className="w-full h-full" resizeMode="cover" />
@@ -55,15 +63,20 @@ export function ProductCard({
           <Text className="text-primary font-extrabold text-lg">
             ${price.toLocaleString('es-MX')}
           </Text>
+          {/* Aquí se renderiza el número exacto de stock de la sucursal */}
           {getStockBadge()}
         </View>
       </View>
 
-      {/* Botón de Agregar (Ideal para el POS y Carrito) */}
+      {/* Botón de Agregar */}
       {onAddPress && (
         <Pressable 
           onPress={onAddPress}
-          className="ml-3 w-10 h-10 bg-primary rounded-full items-center justify-center shadow-neo active:opacity-70"
+          disabled={stock <= 0} // Deshabilitamos si no hay stock real
+          className={cn(
+            "ml-3 w-10 h-10 rounded-full items-center justify-center shadow-neo active:opacity-70",
+            stock <= 0 ? "bg-gray-300" : "bg-primary"
+          )}
         >
           <Plus color="#F5F0E8" size={20} />
         </Pressable>

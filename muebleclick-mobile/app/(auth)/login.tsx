@@ -25,7 +25,6 @@ export default function LoginScreen() {
     }
 
     try {
-      // 1. Disparamos la petición a NestJS
       const response = await ejecutarLogin({
         variables: {
           input: { correo, password }
@@ -33,16 +32,18 @@ export default function LoginScreen() {
       });
 
       const { access_token, usuario } = response.data.login;
-      
-      // 2. Extraemos el rol que viene de la base de datos
       const rolDelBackend = usuario.rol.nombre; 
-
-      // 3. Pasamos el token y el rol a nuestro AuthContext
-      await login(access_token, rolDelBackend);
       
+      console.log("Rol exacto recibido de la BD:", rolDelBackend); 
+
+      const rolNormalizado = rolDelBackend.trim().charAt(0).toUpperCase() + rolDelBackend.trim().slice(1).toLowerCase();
+
+      await login(access_token, rolNormalizado as any);
+      
+    // 👇 ESTA ES LA LLAVE QUE FALTABA
     } catch (error: any) {
       console.error("Error de login:", error);
-      Alert.alert("Credenciales incorrectas", "Verifica tu correo y contraseña.");
+      Alert.alert("Error de Acceso", "Credenciales inválidas.");
     }
   };
 
